@@ -39,7 +39,34 @@ export default class Auth {
   };
 
   isAuthenticated() {
-      const expiresAt = JSON.parse(localStorage.getItem("expires_at"));
-      return new Date().getTime() < expiresAt;
+    const expiresAt = JSON.parse(localStorage.getItem("expires_at"));
+    return new Date().getTime() < expiresAt;
   }
+
+  logout = () => {
+    localStorage.removeItem("access_token");
+    localStorage.removeItem("id_token");
+    localStorage.removeItem("expires_at");
+    //this.history.push("/");
+    this.auth0.logout({
+      clientID: process.env.REACT_APP_AUTH0_CLIENT_ID,
+      returnTo: "http://localhost:3000"
+    });
+  };
+
+  getAccessToken = () => {
+    const accessToken = localStorage.getItem("access_token");
+    if (!accessToken) {
+      throw new Error("No access token found.");
+    }
+    return accessToken;
+  };
+
+  getProfile = cb => {
+    if (this.userProfile) return CSS(this.userProfile);
+    this.auth0.client.userInfo(this.getAccessToken(), (err, profile) => {
+        if (profile) this.userProfile = profile;
+        cb()
+    });
+  };
 }
