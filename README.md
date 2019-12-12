@@ -1,5 +1,18 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+If it says create-react-app is missing global templates
+Step 1.
+npm install -g create-react-app
+Step 2. Uninstall it
+npm uninstall -g create-react-app
+Step 3. Proceed as normal (remember to use npx)
+npx create-react-app my-app
+
+
+## Then install all of this for Auth0 stuffz
+npm install auth0-js@9.8.0 auth0-lock@11.10.0 express@4.16.3 express-jwt@5.3.1 express-jwt-authz@1.0.0 jwks-rsa@1.3.0 npm-run-all@4.1.3 react-router-dom@4.3.1
+
+
 ## Available Scripts
 
 In the project directory, you can run:
